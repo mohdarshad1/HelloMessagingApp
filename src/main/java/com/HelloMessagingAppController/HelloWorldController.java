@@ -1,5 +1,6 @@
 package com.HelloMessagingAppController;
 
+import com.spring.messagingapp.model.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,10 +20,17 @@ public class HelloWorldController {
         return "Hello " + name + " !!";
     }
 
- // Path Variable
+    // Path Variable
     // GET Request:- Rest call: curl localhost:8080/hello/param/Mark -w "\n"
     @GetMapping("/param/{name}")
     public String helloParam(@PathVariable String name){
         return "Hello " + name +" !!";
+    }
+
+    // Post Request:- Rest call: curl -X POST -H "Content-Type: application/json" -d '{\"firstName\": \”Mark\", \"lastName\": \”Taylor\"}'
+    //                           "http://localhost:8080/hello/post" -w "\n"
+    @PostMapping("/post")
+    public String hello(@RequestBody User user){
+        return "Hello " + user.getFirstName() + " " + user.getLastName() + " !!";
     }
 }
